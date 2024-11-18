@@ -1,8 +1,8 @@
 "use client";
 
-import { signIn } from "next-auth/react";
 import Image from "next/image";
 
+import { signIn } from "@/auth";
 import ROUTES from "@/constants/routes";
 import { toast } from "@/hooks/use-toast";
 
@@ -33,27 +33,41 @@ export default function SocialAuthForm() {
 
   return (
     <div className="mt-10 flex flex-wrap gap-2.5">
-      <Button className={buttonClass} onClick={() => handleSignIn("github")}>
-        <Image
-          src="/icons/github.svg"
-          alt="Github Logo"
-          width={20}
-          height={20}
-          className="invert-colors mr-2.5 object-contain"
-        />
-        <span>Log in with GitHub</span>
-      </Button>
+      <form
+        action={async () => {
+          "use server";
+          await signIn("github");
+        }}
+      >
+        <Button type="submit" className={buttonClass}>
+          <Image
+            src="/icons/github.svg"
+            alt="Github Logo"
+            width={20}
+            height={20}
+            className="invert-colors mr-2.5 object-contain"
+          />
+          <span>Log in with GitHub</span>
+        </Button>
+      </form>
 
-      <Button className={buttonClass} onClick={() => handleSignIn("google")}>
-        <Image
-          src="/icons/google.svg"
-          alt="Google Logo"
-          width={20}
-          height={20}
-          className="mr-2.5 object-contain"
-        />
-        <span>Log in with Google</span>
-      </Button>
+      <form
+        action={async () => {
+          "use server";
+          await signIn("github");
+        }}
+      >
+        <Button type="submit" className={buttonClass}>
+          <Image
+            src="/icons/google.svg"
+            alt="Google Logo"
+            width={20}
+            height={20}
+            className="mr-2.5 object-contain"
+          />
+          <span>Log in with Google</span>
+        </Button>
+      </form>
     </div>
   );
 }

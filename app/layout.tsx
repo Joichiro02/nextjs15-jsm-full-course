@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 
+import { Toaster } from "@/components/ui/toaster";
 import ThemeProvider from "@/context/Theme";
 import "./globals.css";
 
@@ -25,7 +26,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default function GeneralLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -43,6 +44,7 @@ export default function RootLayout({
         >
           {children}
         </ThemeProvider>
+        <Toaster />
       </body>
     </html>
   );
